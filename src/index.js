@@ -21,4 +21,9 @@ const httpServer = http.createServer(app);
 const io = SocketIO(httpServer);
 httpServer.listen(PORT, serverListening);
 
-io.on("connection", socket => {});
+io.on("connection", socket => {
+  socket.on("nickname", (nickname, done) => {
+    socket["nickname"] = nickname;
+    done();
+  });
+});
