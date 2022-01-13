@@ -1,0 +1,23 @@
+{
+  "name": "socketio-chat-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Codiving/socketio-chat-server.git",
+  "author": "codiving <blogkin@naver.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/node": "^7.16.8",
+    "@babel/preset-env": "^7.16.8",
+    "cors": "^2.8.5",
+    "dotenv": "^11.0.0",
+    "express": "^4.17.2",
+    "socket.io": "^4.4.1"
+  },
+  "scripts": {
+    "start:dev": "nodemon --exec babel-node src/index.js"
+  }
+}
