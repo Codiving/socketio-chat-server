@@ -54,6 +54,11 @@ const updateRoomList = () => {
 };
 
 io.on("connection", socket => {
+  socket.on("message", (msg, roomName, done) => {
+    done();
+    socket.broadcast.to(roomName).emit("message", msg);
+  });
+
   socket.on("join-room", (roomName, done) => {
     socket.join(roomName);
     done();
