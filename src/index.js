@@ -54,6 +54,14 @@ const updateRoomList = () => {
 };
 
 io.on("connection", socket => {
+  socket.on("join-room", (roomName, done) => {
+    socket.join(roomName);
+    done();
+    socket
+      .to(roomName)
+      .emit("join-msg", `${socket["nickname"]}님께서 입장하셨습니다. !!!`);
+  });
+
   socket.on("login", () => {
     io.to(socket.id).emit("updateRooms", getUserRooms());
   });
