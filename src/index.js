@@ -54,6 +54,15 @@ const updateRoomList = () => {
 };
 
 io.on("connection", socket => {
+  socket.on("leave-room", (roomName, done) => {
+    socket.leave(roomName);
+    done();
+    const rooms = getUserRooms();
+    if (!rooms.includes(roomName)) {
+      io.emit("remove-room", roomName);
+    }
+  });
+
   socket.on("message", (msg, roomName, done) => {
     done();
     socket.broadcast.to(roomName).emit("message", msg);
@@ -72,7 +81,6 @@ io.on("connection", socket => {
   });
 
   socket.on("create-room", (roomName, done) => {
-    console.log("create-room", roomName);
     socket.join(roomName);
     done();
     updateRoomList();
